@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily document</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <style type="text/css">
+        * {margin: 0; padding: 0;}
+        html {background-color: black; }
+        body {background-color: black; color: white;
+              min-height: 100vh; }
+    </style>
+</head>
+<body>
+  <h1 id="top">{ymd}</h1>
+
+    <div class="theborder">
+    <p>Today is <span id="weekday" class="hgl">{dname}</span>,
+      <span id="dmnr" class="hgl">{dmnr}</span> of <span id="mname" class="hgl">{mname}</span>,
+      <span id="year" class="hgl">{year}</span>.</p>
+    <p>It is <span id="dnr" class="hgl">{dnr}</span> of <span id="daysyear" class="hgl">{daysyear}</span>
+  days in the year, <span id="partOfYear" class="hgl"></span>.
+  Solar declination is DEC = <span id="DEC" class="hgl"
+                             title="bla">...</span></p>
+
+    </div>
+
+    <script defer>
+      const dayNames = {
+        0: "Sunday",
+        1: "Monday",
+        2: "Tuesday",
+        3: "Wednesday",
+        4: "Thursday",
+        5: "Friday",
+        6: "Saturday",
+      };
+
+      const monthNames = {
+        0: "January",
+        1: "February",
+        2: "March",
+        3: "April",
+        4: "May",
+        5: "June",
+        6: "July",
+        7: "August",
+        8: "September",
+        9: "October",
+        10: "November",
+        11: "December"
+      };
+
+        function getDayOfYear(date) {
+          // calculating day nr
+
+          const startOfYear = new Date(date.getFullYear(), 0, 1);  // year, 0 -> jan., the first
+          const diffInMilliseconds = date - startOfYear;  // dnr as a difference
+          // to number of days:
+          const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24)) + 1;
+
+          return diffInDays;
+        }
+
+        function dec(dnr) {
+          const D2R = Math.PI/180;
+          return 23.45 * Math.sin((360.0 * (dnr + 284.0)/365.0)*D2R);
+        }
+
+        // Getting current date, its components
+        // to compute dnr, week day name and fill the 'placeholders':
+        const today_ = new Date();
+        const year = today_.getFullYear();
+        const month = today_.getMonth() + 1;
+        const month_txt = month.toString().padStart(2, '0');
+        const weekday = today_.getDay();
+        const weekdayName = dayNames[weekday];
+        // console.log("weekday = ", weekday, ", weekdayName = ", weekdayName);
+        const day = today_.getDate();
+        const day_txt = day.toString().padStart(2, '0');
+        const ymd_str = `${year}-${month_txt}-${day_txt}`;  // yyyy-mm-dd
+
+        const topElement = document.getElementById("top");
+        topElement.innerHTML = ymd_str;
+        console.log("topElement: ", topElement);
+        const weekdayElement = document.getElementById("weekday");
+        weekdayElement.innerHTML = weekdayName;
+        const dmnrElement = document.getElementById("dmnr");
+        dmnrElement.innerHTML = day;
+        const mnameElement = document.getElementById("mname");
+        mnameElement.innerHTML = monthNames[month - 1];
+        const yearElement = document.getElementById("year");
+        yearElement.innerHTML = year;
+        // Nr of the day in the year:
+        const dayOfYear = getDayOfYear(today_);
+        const dnrElement = document.getElementById("dnr");
+        dnrElement.innerHTML = dayOfYear;
+
+        // calculating nr of days in the year:
+        const lastDate = new Date(year, 11, 31);
+        const nrOfDays = getDayOfYear(lastDate);
+        const daysyearElement = document.getElementById("daysyear");
+        daysyearElement.innerHTML = nrOfDays;
+        const partOfYearElement = document.getElementById("partOfYear");
+        partOfYearElement.innerHTML = (dayOfYear/nrOfDays*100).toFixed(1) + "%";
+
+        // dec:
+        const decElement = document.getElementById("DEC");
+        DEC = dec(dayOfYear);
+        const dDEC = ((DEC)/23.45)*100;
+        const DEC_next = dec(dayOfYear + 1);
+        const trend = (DEC > DEC_next) ? "↙" : "↗";
+        // decElement.innerHTML = DEC.toFixed(3) + "&deg; (" + dDEC.toFixed(1) + "%, " + trend + ")";
+        decElement.innerHTML = DEC.toFixed(3) + "&deg; " + trend + " (" + dDEC.toFixed(1) + "%)";
+        console.log("decElement:", decElement);
+        console.log("dec:", dec);
+        DEC_rel = DEC/23.45*100;
+        decElement.title = DEC_rel.toFixed(1) + "%";
+        decElement.data_tooltip = `${DEC_rel.toFixed(1)}%`;
+        console.log("decElement.title: ", decElement.title);
+        console.log("decElement.data_tooltip: ", decElement.datatolltip);
+    </script>
+</body>
+</html>

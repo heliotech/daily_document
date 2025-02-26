@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily document</title>
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="icon" type="image/png" href="assets/sunny.png">
     <style type="text/css">
-        * {margin: 0; padding: 0;}
         html {background-color: black; }
         body {background-color: black; color: white;
               min-height: 100vh; }
@@ -25,6 +26,18 @@
                              title="bla">...</span></p>
 
     </div>
+
+<div class="theborder" style="position: relative">
+
+  <div id="memorylanediv">
+    Commit to memory:
+
+  </div>
+
+  <script src="assets/memory.json"></script>
+
+</div>
+
 
     <script defer>
       const dayNames = {
@@ -120,6 +133,16 @@
         decElement.data_tooltip = `${DEC_rel.toFixed(1)}%`;
         console.log("decElement.title: ", decElement.title);
         console.log("decElement.data_tooltip: ", decElement.datatolltip);
+
+        // setting contents of div#memorylane
+        const memorylaneElement = document.getElementById("memorylanediv");
+
+        var contents = "<p>Commit to memory:</p>"
+        for (const key in memorylane) {
+          contents += `<p class="mitem tooltip" data-tooltip="${memorylane[key]['def']}">${memorylane[key]['item']}</p>\n`;
+        };
+        memorylaneElement.innerHTML = contents;
+
     </script>
 </body>
 </html>

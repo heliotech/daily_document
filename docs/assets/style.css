@@ -49,27 +49,42 @@ div.theborder {
   }
 
 #link-1 {
-    display: block;
+    /* color: transparent; /1* Ukrywa tekst *1/ */
+    opacity: 0;
+    transition: color 0.3s ease-in-out; /* Płynna zmiana koloru */
+    padding: 0.25rem;
+    /* display: block; */
     border: var(--item-1-border-style) 2px blue;
     border-radius: 0.5em;
     width: var(--hidden-link-length); height: 3rem;
-    position: absolute; top: 0.5rem; left: 40rem;
+    position: absolute; top: 0.1rem; left: 40rem;
   }
 
 #link-1:hover {
-    background-color: rgb(255, 255, 240, .15);
+    opacity: 1;
+    color: var(--foreground);
+    background-color: rgb(20, 20, 20, .85);
+    border: solid 2px rgb(40, 40, 40);
   }
 
 #link-2 {
-    display: block;
+    /* display: block; */
+    opacity: 0;
+    transition: color 0.3s ease-in-out; /* Płynna zmiana koloru */
+    padding: 0.25rem;
     border: var(--item-2-border-style) 2px red;
     border-radius: 0.5em;
-    width: var(--hidden-link-length); height: 3rem;
+    /* width: var(--hidden-link-length); */
+    width: var(--hidden-link-length);
+    height: 3rem;
     position: absolute; top: 3rem; left: 40rem;
   }
 
 #link-2:hover {
-    background-color: rgb(255, 255, 240, .15);
+    opacity: 1;
+    color: var(--foreground);
+    background-color: rgb(20, 20, 20, .85);
+    border: solid 2px rgb(40, 40, 40);
   }
 
 /*#link-2 {float: right;
@@ -100,7 +115,8 @@ div a {
   }
 
 .floating {
-    position: relative; width: 0; height: 0;
+    position: absolute; width: 600; height: 0;
+    z-index: 2;
   }
 
 /* Styl tooltipa */
@@ -146,7 +162,8 @@ div a {
     background-color: #333;
     color: #fff;
     padding: 10px;
-    border-radius: 5px;
+    border: solid 1px yellow;
+    border-radius: 0.5em;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;

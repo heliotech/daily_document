@@ -1,0 +1,163 @@
+
+html {
+  background-color: black; /*<#f0f0f0;*/
+}
+
+body {
+  color: white; /*@gray;*/
+  font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+  padding-right: 2rem;
+  width: 96%;
+  margin: auto;
+  /* background-image: url('img/DuckDuckGo_logo300x200+.svg');*/
+}
+
+/* #parentTitle { */
+/* 	background: url('img/DuckDuckGo_logo300x200+.svg') no-repeat center; */
+/* } */
+
+h1.title {
+  text-align: center;
+  /*padding-bottom: 0.1rem;*/
+  margin-bottom: 1.9rem;
+}
+
+h1.title span {
+	background-color: rgba(127, 127, 127, 0.7);
+	z-index: 1000;
+	padding: 12pt;
+	border-radius: 6pt;
+}
+
+p.title {text-align: center;}
+
+p.title span {
+	color: white;
+	background-color: rgba(127, 127, 127, 0.7);
+	padding: 12pt;
+	border-radius: 6pt;
+}
+
+div.title {
+  margin-top: 2.4rem;
+  margin-bottom: 2.4rem;
+  padding-bottom: 0.6rem;
+  border-bottom: white 1px solid;
+}
+
+div#parent {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-around;
+  
+  width: 100%;
+}
+
+
+div.flexRow {
+  display: inline-flex;
+  justify-content: space-evenly;
+  background-color: darkgray;
+
+  /*border: solid red 1px;*/
+  /*border-radius: 10px;*/
+  border-radius: 0px 0px 10px 10px;
+  /*margin: 2px;*/
+  margin-bottom: 5rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+div.row_tit {
+  display: inline-flex;
+  border: none;
+  font-size: 18pt;
+  font-weight: bold;
+  font-style: italic;
+  background-image: linear-gradient(to right, darkgrey , black);
+  border-radius: 10px 10px 0px 0px;
+  padding-left: 5pt;
+  padding-top: 5pt;
+}
+
+div p {
+	color: black;
+	font-size: larger;
+	font-weight: bold;
+	}
+
+select {
+	font-weight: bold;
+}
+
+select:hover {
+	color: chocolate;
+	font-weight: bold;
+}
+
+input {
+	padding: 3px;
+	font-family: monospace;
+	font-size: x-large;
+	min-width: 5rem;
+	}
+	
+input:hover {
+	background: Lavender;
+	color: chocolate;
+	font-weight: bold;
+}
+
+form button {
+	background: Lavender;
+	margin-left: 2pt;
+}
+
+form button:hover {
+	background: CornSilk;
+}
+
+button {
+	font-size: large;
+	}
+
+/* div div {border: solid blue 1px; } */
+
+div#sign {
+	position: absolute;
+	right: -100px;
+	bottom: -20px;
+	font-size: 12pt;
+	}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border: solid white 1px;
+  border-radius: 6px;
+  padding: 5px;
+
+  /* Position the tooltip */
+  position: relative;
+  top: -30px;
+  left: -270px;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  color: silver;
+  visibility: visible;
+}

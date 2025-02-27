@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>softdev search engine</title>
+<link rel="icon" type="image/png" href="assets/img/searchUtfIcon.png">
+<link rel="stylesheet" href="assets/softdev_style.css">
+
+<script>
+
+var out00String = "";
+
+backgroundImages = ["assets/img/DuckDuckGo_logo300x200+.svg", "assets/img/Google_2015_logo.svg", "assets/img/Yahoo!_3.svg"];  // DuckDuckGo_logo_004
+
+tabs4 = "&nbsp;&nbsp;&nbsp;&nbsp;";
+tabs8 = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+
+function print(string) {
+  out00String += string;
+  return out00String;
+}
+
+function println(string) {
+  out00String += string + "<br />";
+  return out00String;
+}
+
+function printArr(element, index) {
+  //prints array -- concats with `out00String`
+  
+  out00String = println(index + ") " + element.id);
+}
+
+function onlyParas(element, idx) {
+  // For filtering 'paragraphs' from an array
+  if (element.tagName == "P"){
+    console.log("onlyParas: returning " + element.tagName);
+    try {
+        console.log("    element.attributes.class.value: " + element.attributes.class.value);
+    } catch (error) {
+      console.log("    >" + error + "<");
+    }
+    return element;
+  }
+}
+
+var	InputDB = {rowPython: {title: "",
+                              sections: {}},
+                              // sections: {s00: {title: "Search: python + ...", hint: "python "},
+                              //            s01: {title: "Search: matplotlib + ...", hint: "matplotlib "},
+                              //            s02: {title: "Search: numpy + ...", hint: "numpy "},
+                              //            s03: {title: "Search: sympy + ...", hint: "sympy "},}},
+          rowLaTeX: {title: "",
+                      sections: {}},
+				  rowHTML: {title: "",
+				  						sections: {}},
+				  };
+InputDB.rowPython.title = "Python";
+InputDB.rowPython.sections.s00 = {title: "Search: python + ...", hint: "python "};
+InputDB.rowPython.sections.s01 = {title: "Search: matplotlib + ...", hint: "matplotlib "};
+InputDB.rowPython.sections.s02 = {title: "Search: numpy + ...", hint: "numpy "};
+InputDB.rowPython.sections.s03 = {title: "Search: sympy + ...", hint: "sympy "};
+InputDB.rowHTML.title = "HTML and CSS";				  
+InputDB.rowHTML.sections.s00 = {title: "Search: html + ... ", hint: "html "};
+InputDB.rowHTML.sections.s01 = {title: "Search: css + ... ", hint: "css "};
+InputDB.rowHTML.sections.s02 = {title: "Search: javascript + ... ", hint: "javascript "};
+InputDB.rowLaTeX.title = "LaTeX";
+InputDB.rowLaTeX.sections.s00 = {title: "Search: latex + ... ", hint: "latex "};
+InputDB.rowLaTeX.sections.s01 = {title: "Search: latex how to + ... ", hint: "latex how to "};
+var IDBKeys = Object.keys(InputDB);
+
+function addSearchSection(section) {
+  // root:
+  const rootDiv = document.getElementById("parent");
+  
+  // new section title:
+  var newTitleDiv = document.createElement("div");
+  newTitleDiv.setAttribute("id", "1");
+  newTitleDiv.setAttribute("class", "row_tit");
+  var node = document.createTextNode(section.title);
+  newTitleDiv.append(node);
+  rootDiv.appendChild(newTitleDiv);
+  
+  // new `flexRow`:
+  var newFlexRowDiv = document.createElement("div");
+  newFlexRowDiv.setAttribute("id", "row01");
+  newFlexRowDiv.setAttribute("class", "flexRow");
+  
+  var sectionTilesKeys = Object.keys(section.sections);
+  var tilesLen = sectionTilesKeys.length;
+  for (i = 0; i < tilesLen; i++) {
+    //console.log("Adding `" + section.sections[sectionTilesKeys[i]] + "`(" + section.sections + ")");
+    addSearchTile(section.sections[sectionTilesKeys[i]], newFlexRowDiv);
+  }
+  
+  rootDiv.appendChild(newFlexRowDiv);
+}
+
+function addSearchTile(tile, root){
+  //console.log("addSearchTile(" + tile + ", " + root + ")");
+  const rootDiv = document.getElementById("parent");
+  
+  // elements of 'searchCont':
+    // button:
+  var submitButton = document.createElement("button");
+  submitButton.setAttribute("type", "submit");
+  submitButton.setAttribute("title", "Search DuckDuckGo");
+  submitButton.setAttribute("class", "button");
+  if (tile['hint'].includes('python')){
+  	var searchIcon = document.createTextNode("🐍");
+  	} else {
+  		var searchIcon = document.createTextNode("🔎");
+  	}
+  submitButton.appendChild(searchIcon);
+    // inputs:
+  var inputKh = document.createElement("input");
+  inputKh.setAttribute("type", "hidden");
+  inputKh.setAttribute("value", "1");
+  inputKh.setAttribute("name", "kh");
+  var inputKn = document.createElement("input");
+  inputKn.setAttribute("type", "hidden");
+  inputKn.setAttribute("value", "1");
+  inputKn.setAttribute("name", "kn");
+  var inputKac = document.createElement("input");
+  inputKac.setAttribute("type", "hidden");
+  inputKac.setAttribute("value", "1");
+  inputKac.setAttribute("name", "kac");
+  var inputSearch = document.createElement("input");
+  inputSearch.setAttribute("class", "searchTitle");
+  inputSearch.setAttribute("type", "search");
+  inputSearch.setAttribute("size", "30");
+  inputSearch.setAttribute("name", "q");
+  inputSearch.setAttribute("value", tile.hint);
+  if (tile.hint == "python ") {
+  		inputSearch.setAttribute("id", "setAutofocus");
+  		// inputSearch.setAttribute("onfocus", "this.value = this.value;");
+  }
+    // form:
+  var formElement = document.createElement("form");
+  formElement.setAttribute("class", "searchform");
+  formElement.setAttribute("name", "x");
+  formElement.setAttribute("action", "https://duckduckgo.com/");
+  formElement.appendChild(inputKh);
+  formElement.appendChild(inputKn);
+  formElement.appendChild(inputKac);
+  formElement.appendChild(inputSearch);
+  formElement.appendChild(submitButton);
+  
+  // new searchCont:
+  var contTitle = document.createTextNode(tile.title);
+  var contTitleP = document.createElement("p");
+  contTitleP.appendChild(contTitle);
+  var searchContDiv = document.createElement("div");
+  searchContDiv.setAttribute("id", "e00");
+  searchContDiv.setAttribute("class", "searchCont");
+  searchContDiv.appendChild(contTitleP);
+  searchContDiv.appendChild(formElement);
+  
+  root.appendChild(searchContDiv);
+}
+
+function generateEngine() {
+  
+  // root:
+  const rootDiv = document.getElementById("parent");
+  
+  // automated addition:
+  //console.log("automated addition, InputDB = " + JSON.stringify(InputDB));
+  for (let row in InputDB) {
+    addSearchSection(InputDB[row]);
+  }
+  
+  // var formFocus = document.getElementById("setAutofocus");
+  // formFocus.input.value = formFocus.input.value;
+  // alert("" + formFocus);
+  update();
+
+}
+
+function testDom() {
+	// output:
+	console.log("testDom()");
+	var outPara = document.getElementById("pOut00");
+   out00String = println("Output:");
+   var formElements = document.getElementsByTagName("form");
+   var noForms = formElements.length;
+   out00String = println("No of forms: " + noForms);
+   for (i = 0; i < noForms; i++) {
+   	out00String = println(i + ") form.getAttribute('action') = " + formElements[i].getAttribute("action"));
+   }
+   
+   parent.scrollTo(0,0);
+   
+   // /////////////////////////////
+   outPara.innerHTML = out00String;
+   // printDebug();
+}
+
+function printDebug() {
+	
+}
+
+function update() {
+   var selectEngine = document.getElementById("engine-select");
+   var myindex  = selectEngine.selectedIndex
+   if (myindex == 0) {
+   	myindex = 1;
+   }
+   var selValue = selectEngine.options[myindex].value
+	//alert("update()! index = ");
+	
+	// getting all the search-forms (class=searchform)
+	searchForms = document.getElementsByClassName("searchform");
+	lSForms = searchForms.length;
+	const engines = {"duckduckgo": "https://duckduckgo.com/", "google": "https://www.google.com/search",
+	                 "yahoo": "https://search.yahoo.com/search"};
+	// setting a new search engine:
+	for (i = 0; i < lSForms; i++) {
+		searchForms[i].setAttribute("action", engines[selValue]);
+	}
+	// background image:
+	// document.body.style.backgroundImage = "url('assets/img/Yahoo!_3.svg')";
+	document.body.style.backgroundImage = "url('" + backgroundImages[myindex - 1] + "')";
+	// document.body.style.backgroundRepeat = "no-repeat";
+	// alert("Setting: " + "url('" + backgroundImages[myindex] + "') (index = " + myindex + ")");
+	out00String = println("lSForms = " + lSForms + "\n");
+	for (i = 0; i < lSForms; i++) {
+		out00String = println("searchForms[" + i + "] = " + searchForms[i].getAttribute("action") + "\n");
+	}
+	
+	document.getElementById("setAutofocus").focus();
+	
+	//alert("update()! index = " + myindex +", value = " + selValue + "\n" + out00String);
+	
+	//outPara.innerHTML = out00String;
+	
+	parent.scrollTo(0,0);  // scrolling to the top of the document
+	
+	var formFocus = document.getElementById("setAutofocus");
+	// alert("ff: " + formFocus);
+		
+}
+
+</script>
+
+</head>
+<body onload="generateEngine()">
+
+<div id="parentTitle" class="title">
+<h1 class="title"><span>Custom search interface</span></h1>
+<p class="title"><span>v. 2</span></p>
+
+<select name="engine" id="engine-select" onchange="update()" title="Choose the search engine">  <!-- this.form.submit() -->
+    <option value="">--Choose the engine--</option>
+    <option selected value="duckduckgo" selected>DuckDuckGo</option>
+    <option value="google">Google</option>
+    <option value="yahoo">Yahoo</option>
+</select>
+
+</div>
+
+<div id="parent">
+
+  
+</div>
+
+<button id="button00" type="button" onclick="testDom()">Test DOM</button>
+
+<p id="pOut00" class="blabla"></p>
+
+<script>
+// console.log("blabla");
+// function update() {
+	// alert("engine change!");
+	// var engineSelect = document.getElementById("engineSelect");
+	// out00String = println("engineChange");
+	// out00String = println("engineSelect!");
+	// var select = document.getElementById('engine-change');
+	// var value = select.options[select.selectedIndex].value;
+	// alert("engineChange!" + value);
+	
+	// outPara.innerHTML = out00String;
+	// console.log("update");
+	
+	// }
+</script>
+
+<!--
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+<div>margin</div>
+-->
+
+<div id="sign" class="tooltip">khaz&copy;2021
+  <span class="tooltiptext">copyright: khaz, 2021</span>
+</div>
+<!-- <p id="sign" title="copyright: khaz, 2021">khaz&copy;2021</p> -->
+
+</body>
+</html>

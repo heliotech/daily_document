@@ -1,3 +1,5 @@
+* {padding: 0; margin: 0; }
+
 :root {
     --item-1-border-style: none;
     --item-2-border-style: none;
@@ -26,16 +28,59 @@ html {
   }
 
 body {
-    margin: 1em;
-    padding: 0;
+    /* margin: 1em; */
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    /* align-items: center; */
+    /* align-items: stretch; */
+    /* align-items: flex-end; */
     color: var(--foreground);
+    min-height: 100vh;
 
     font-size: 1rem;
-  }
+}
 
 div.theborder {
     box-shadow: 8px 8px 5px;
   }
+
+/* ad collapsibles: */
+.collapsible {
+  background-color: #000;
+  color: white;
+  cursor: pointer;
+  padding: 0.3em 0.3em 0.2em 0.6em;
+  width: 100%;
+  border: solid 2px white;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.content {
+  opacity: 1;
+  padding: 0 18px;
+  min-width: 95%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+  background-color: black;
+}
+
+/* .button-collapsible {width: 80%; margin: 0 auto; height: 2.0em; */
+/*                      margin-top: 0.5em;} */
+.button-collapsible {width: 80%; height: 2.0em; margin-left: 10em; margin-right: 20em;
+                     margin-top: 0.5em;}
+
+.bred {background-color: red;}
+
+.itc {font-style: italic;}
+
+.active, .collapsible:hover {
+  background-color: #222;
+}
 
 /*    div {position: absolute;}*/
 .hgl {
@@ -46,6 +91,8 @@ div.theborder {
     text-align: center; text-shadow: 2px 2px var(--shadow);
     border-bottom: solid 2px var(--foreground);
     padding-bottom: 0.6rem; max-width: 50%; margin: auto;
+    margin-bottom: 0.6rem;
+    width: 8em;
   }
 
 #link-1 {
@@ -97,10 +144,14 @@ width: 20em; height: 3em;
     border-style: solid; border-width: 2px;
     border-color: var(--foreground);
     margin: 1em; padding: 1em;
-  }
+}
+
+.theborder p {margin-bottom: 1em; }
+.theborder p:last-child {margin-bottom: 0; }
 
 .mitem {
     color: var(--memory-color);
+    margin-top: 0.5em;
     margin-left: 1em;
     font-style: italic; font-size: 1.2rem;
   }
@@ -116,6 +167,7 @@ div a {
 
 .floating {
     position: absolute;
+    width: 600px; height: 0;
     z-index: 2;
   }
 
@@ -133,7 +185,7 @@ div a {
     bottom: 125%;  /* shift/position to the right */
     left: 33%;  /* shift/position up */
     transform: translateX(-50%);
-    background-color: #333;
+    background-color: #111;
     color: #fff;
     padding: 10px;
     border-radius: 5px;
@@ -141,10 +193,12 @@ div a {
     pointer-events: none;
     transition: opacity 0.3s ease;
     min-width: 10em;
+    font-size: 0.8em;
   }
 
 .tooltip:hover::after {
     opacity: 1;
+    background-color: rgba(20, 20, 20, 0.9);
   }
 
 /* Left tooltip */

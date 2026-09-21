@@ -5,5 +5,5 @@ const memorylane = {  /* with 'const' only one variable, when more: without (dis
     "2": {"item": "ἐξ ἑνὸς ἕτερον",
           "def": "One leads to another (lit. from one another)"},
     "3": {"item": "καὶ γνώσεσθε τὴν ἀλήθειαν, καὶ ἡ ἀλήθεια ἐλευθερώσει ὑμᾶς.",
-          "def": "kai gnōsesthe tēn alētheian, kai hē alētheia eleutherōsei hymas"}
+          "def": "kai gnōsesthe tēn alētheian, kai hē alētheia eleutherōsei hymas / and you will know the truth, and the truth will set you free"}
 }

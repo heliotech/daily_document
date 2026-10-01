@@ -310,7 +310,7 @@
 
     async function renderMemoryLane() {
       try {
-        const response = await fetch('/assets/memory.json');
+        const response = await fetch('assets/memory.json');
         if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
         const memorylane = await response.json();

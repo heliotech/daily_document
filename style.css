@@ -1,0 +1,79 @@
+html {
+      height: 100%;
+      background-color: black;
+      margin: 0;
+      padding: 0;
+
+      font-size: 0.7cm;
+    }
+    body {
+      margin: 1em;
+      padding: 0;
+      color: ivory;
+
+      font-size: 1rem;
+    }
+
+    h1 {color: lightskyblue; font-family: Arial, sans-serif;
+        margin: auto; margin-bottom: 1em; padding-bottom: 0.2em; text-align: center;
+        width: 60%; border-bottom: solid 2px lightskyblue;}
+
+    div.theborder {
+      box-shadow: 8px 8px 5px;
+    }
+    .hgl {font-weight: bold; color: navajowhite; font-size: 1.2rem; }
+    #top {text-align: center; text-shadow: 2px 2px navajowhite;
+          border-bottom: solid 2px ivory;
+          padding-bottom: 0.6rem; max-width: 50%; margin: auto;}
+    .theborder {border: solid 2px ivory; margin: 1em; padding: 1em;}
+
+    .mitem {color: navajowhite; margin-left: 1em; font-style: italic; font-size: 1.2rem;
+            /* tooltip properties: */
+            /* !DBG */
+/*            border: solid blue 1px;*/
+            }
+
+    /* Styl tooltipa */
+    .tooltip {
+      position: relative;
+      display: block;
+    }
+
+    .tooltip::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 125%;  /* shift/position to the right */
+      left: 33%;  /* shift/position up */
+      transform: translateX(-50%);
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      min-width: 10em;
+    }
+
+    .tooltip:hover::after {
+      opacity: 1;
+    }
+
+    /* Classes - fonts */
+    .monospace {color: beige; font-family: monospace; }
+
+a {
+    color: lightblue;
+}
+
+dl dt {
+    font-style: italic;
+    font-family: monospace;
+    margin-bottom: 0.5rem;
+}
+
+dl dd {
+    /* font-style: italic; */
+    /* font-family: monospace; */
+    margin-bottom: 0.5rem;
+}

@@ -111,6 +111,11 @@ width: 20em; height: 3em;
     color: navy;
   }
 
+a {
+    color: lightblue;
+    /* text-decoration: none; */
+  }
+
 div a {
     color: mintcream; position: absolute; bottom: 0; right: 0.5em;
     text-decoration: none;
@@ -175,3 +180,15 @@ div a {
 .ltooltip:hover::after {
     opacity: 1;
   }
+
+dl dt {
+    font-style: italic;
+    font-family: monospace;
+    margin-bottom: 0.5rem;
+}
+
+dl dd {
+    /* font-style: italic; */
+    /* font-family: monospace; */
+    margin-bottom: 0.5rem;
+}

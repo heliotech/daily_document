@@ -40,7 +40,7 @@ div.theborder {
   }
 
 div#memorylanediv {
-    height: 13rem;        /* Określona stała wysokość */
+    height: 18rem;        /* Określona stała wysokość */
     overflow-y: auto;     /* Włącza pionowy pasek przewijania tylko gdy treść się nie mieści */
     overflow-x: hidden;     /* Włącza pionowy pasek przewijania tylko gdy treść się nie mieści */
     border: 1px solid #ccc;

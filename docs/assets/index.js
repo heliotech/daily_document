@@ -269,7 +269,7 @@ async function renderMemoryLane() {
 
     const memorylane = await response.json();
 
-    let contents = "<p>Commit to memory:</p>";
+    let contents = "";
     const indicesRev = Object.keys(memorylane).reverse();
     for (const idx in indicesRev) {
       const key = indicesRev[idx];

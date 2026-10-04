@@ -8,5 +8,7 @@
     "4": {"item": "Adhuc loquor. Permite mihi finire, quaeso.",
           "def": "I am still speaking. Allow me to finish, please."},
     "5": {"item": "societas meretricis et furis",
-          "def": "prostitutes and thieves company"}
+          "def": "prostitutes and thieves company"},
+    "6": {"item": "Consentiamus in dissensu",
+          "def": "kon-sen-cjamus in dis-SEN-su"}
 }

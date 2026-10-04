@@ -270,7 +270,9 @@ async function renderMemoryLane() {
     const memorylane = await response.json();
 
     let contents = "<p>Commit to memory:</p>";
-    for (const key in memorylane) {
+    const indicesRev = Object.keys(memorylane).reverse();
+    for (const idx in indicesRev) {
+      const key = indicesRev[idx];
       contents += `<p class="mitem tooltip" data-tooltip="${memorylane[key]['def']}">${memorylane[key]['item']}</p>\n`;
     }
 
